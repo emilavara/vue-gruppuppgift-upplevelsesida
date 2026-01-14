@@ -1,0 +1,10 @@
+@use './layout.scss';
+@use './variables.scss';
+@use './typography.scss';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Google Sans', system-ui, sans-serif;
+    font-display: swap;
+}
