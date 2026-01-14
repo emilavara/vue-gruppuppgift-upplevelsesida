@@ -1,0 +1,25 @@
+{
+    "articles": [
+        {
+            "id": "why-yoga-retreat",
+            "title": "Varför välja ett yogaretreat?",
+            "image": "/images/articles/yoga-retreat.jpg",
+            "excerpt": "Ett yogaretreat ger dig tid att stanna upp, återhämta dig och hitta tillbaka till balansen.",
+            "content": "I en vardag fylld av krav och tempo kan ett yogaretreat vara precis det kroppen och sinnet behöver. Genom att kombinera yoga, vila och natur skapas utrymme för återhämtning på djupet."
+        },
+        {
+            "id": "yoga-for-beginners",
+            "title": "Yoga för nybörjare – vad ska man tänka på?",
+            "image": "/images/articles/yoga-beginners.jpg",
+            "excerpt": "Du behöver inte vara vig eller erfaren för att börja med yoga.",
+            "content": "Yoga handlar inte om prestation utan om närvaro. Som nybörjare är det viktigt att lyssna på kroppen, ta pauser och hitta en form av yoga som känns rätt för dig."
+        },
+        {
+            "id": "mindfulness-and-yoga",
+            "title": "Mindfulness och yoga – en oslagbar kombination",
+            "image": "/images/articles/mindfulness-yoga.jpg",
+            "excerpt": "När yoga och mindfulness möts skapas förutsättningar för verklig återhämtning.",
+            "content": "Mindfulness hjälper dig att vara närvarande i stunden, medan yoga stärker kroppen. Tillsammans bidrar de till minskad stress och ökat välmående."
+        }
+    ]
+}
