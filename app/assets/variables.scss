@@ -1,5 +1,7 @@
 :root {
-    --page-width: 1200px;
+    overscroll-behavior: none;
+
+    --page-width: 75rem;
 
     --text-foreground-color: hsl(0 0 10%);
     --text-muted-foreground-color: hsl(0 0 45%);

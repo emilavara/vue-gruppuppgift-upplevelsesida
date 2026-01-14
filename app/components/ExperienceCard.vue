@@ -7,19 +7,20 @@
 </script>
 
 <template>
-    <NuxtLink href="" class="col-3 col-xs-12 experience-card">
+    <div class="col-3 col-xs-6 experience-card">
         <div class="image-container">
             <img :src="experience.image" height="200"/>
         </div>
         <div>
             <h5>{{ experience.title }}</h5>
-            <p>{{ experience.description }}</p>
+            <!-- <p>{{ experience.description }}</p> -->
+            <p>{{ experience.location }} &bullet; från {{ experience.basePricePerDay }} kr</p>
         </div>
         <div class="button-container">
-            <button class="secondary sm">Läs mer</button>
-            <button class="primary sm">Boka nu</button>
+            <NuxtLink :to="`/upplevelse/${experience.id}`" class="button secondary sm">Läs mer</NuxtLink>
+            <NuxtLink class="button primary sm">Boka nu</NuxtLink>
         </div>
-    </NuxtLink>
+    </div>
 </template>
 
 <style lang="scss">

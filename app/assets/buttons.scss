@@ -1,11 +1,14 @@
-button {
+.button {
     all: unset;
-    background-color: hsl(0, 0, 15%);
-    color: white;
     padding: 0.5rem 1rem;
     border-radius: 64px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+
+    &.primary {
+        background-color: hsl(0, 0, 15%);
+        color: white;
+    }
 
     &:hover {
         background-color: hsl(0, 0, 30%);
