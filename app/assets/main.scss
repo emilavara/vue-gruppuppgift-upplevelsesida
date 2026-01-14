@@ -1,6 +1,31 @@
 @use './layout.scss';
 @use './variables.scss';
 @use './typography.scss';
+@use './buttons.scss';
+@use './grid.scss';
+@use './utilities.scss';
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+
+  // @media (min-width: 1920px) {
+  //   font-size: 0.85vw;
+  // }
+
+  @media (min-width: 1920px) {
+    font-size: 0.85vw;
+  }
+
+  @media (max-width: 1232px) and (min-width: 769px) {
+    font-size: 1.28vw;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    // touch-action: pan-y;
+  }
+}
 
 body {
     margin: 0;

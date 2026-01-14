@@ -1,7 +1,15 @@
 :root {
+    --page-width: 1200px;
+
     --text-foreground-color: hsl(0 0 10%);
     --text-muted-foreground-color: hsl(0 0 45%);
 
     --bg-color: hsl(0 0 100%);
     --container-color: hsl(0 0 95%);
+
+    --button-primary: hsl(0 0 15%);
+    --button-primary-hover: hsl(0 0 30%);
+
+    --button-secondary: hsl(0 0 95%);
+    --button-secondary-hover: hsl(0 0 90%);
 }
