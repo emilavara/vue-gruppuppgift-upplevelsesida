@@ -1,31 +1,68 @@
 <script setup lang="ts">
-    import { ref } from "vue";
+    import { computed, ref } from "vue";
     import DatePicker from "./DatePicker.vue";
+    import PersonPicker from "./PersonPicker.vue";
 
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-
-    const date = ref<string>(`${yyyy}-${mm}-${dd}`);
-    const showPicker = ref(false);
-
-    const togglePicker = () => {
-        showPicker.value = !showPicker.value;
+    type PeopleCounts = {
+        adults: number;
+        children: number;
+        seniors: number;
     };
+
+    const props = defineProps<{
+        date: string;
+        people: PeopleCounts;
+    }>();
+
+    const emit = defineEmits<{
+        (event: "update:date", value: string): void;
+        (event: "update:people", value: PeopleCounts): void;
+    }>();
+
+    const showDatePicker = ref(false);
+    const showPersonPicker = ref(false);
+
+    const dateValue = computed({
+        get: () => props.date,
+        set: (value) => emit("update:date", value),
+    });
+
+    const peopleValue = computed({
+        get: () => props.people,
+        set: (value) => emit("update:people", value),
+    });
+
+    const toggleDatePicker = () => {
+        showDatePicker.value = !showDatePicker.value;
+    };
+
+    const togglePersonPicker = () => {
+        showPersonPicker.value = !showPersonPicker.value;
+    };
+
+    const peopleLabel = computed(() => {
+        const total = props.people.adults + props.people.children + props.people.seniors;
+        return `${total} personer`;
+    });
 </script>
 
 <template>
-    <form class="search-form">
-            <div class="date-toggle" @click.stop="togglePicker">
+    <div class="search-form">
+        <div class="picker-group">
+            <div class="picker-toggle" @click.stop="toggleDatePicker">
                 <p class="label">Välj datum</p>
-                <p class="chosen-date">{{date}}</p>
+                <p class="chosen-value">{{ dateValue }}</p>
             </div>
-            <div class="date-toggle" @click.stop="togglePicker">
-                asd
+            <DatePicker v-model="dateValue" :show="showDatePicker" @close="showDatePicker = false" />
+        </div>
+        <div class="picker-group">
+            <div class="picker-toggle" @click.stop="togglePersonPicker">
+                <p class="label">Personer</p>
+                <p class="chosen-value">{{ peopleLabel }}</p>
             </div>
-            <DatePicker v-model="date" :show="showPicker" @close="showPicker = false" />
-    </form>
+            <PersonPicker v-model="peopleValue" :show="showPersonPicker" @close="showPersonPicker = false" />
+        </div>
+    </div>
 </template>
 
 <style lang="scss">
@@ -37,7 +74,6 @@
         position: absolute;
         bottom: -2rem;
         display: flex;
-        // overflow: hidden;
         border: 1px solid #e3e3e3;
 
         @media (max-width: 768px) {
@@ -45,12 +81,18 @@
         }
     }
 
-    .date-picker {
+    .picker-group {
         position: relative;
+        flex: 1;
     }
 
-    .date-toggle {
-        width: 50%;
+    .picker-group + .picker-group {
+        border-left: 1px solid #e3e3e3;
+    }
+
+    .picker-toggle {
+        position: relative;
+        // width: 100%;
         height: 100%;
         display: flex;
         justify-content: center;
@@ -68,7 +110,7 @@
             font-size: 0.75rem;
         }
 
-        .chosen-date {
+        .chosen-value {
             color: black;
             font-weight: 600;
         }

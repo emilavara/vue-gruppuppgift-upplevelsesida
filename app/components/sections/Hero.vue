@@ -1,10 +1,40 @@
+<script setup lang="ts">
+    import { computed } from "vue";
+
+    type PeopleCounts = {
+        adults: number;
+        children: number;
+        seniors: number;
+    };
+
+    const props = defineProps<{
+        date: string;
+        people: PeopleCounts;
+    }>();
+
+    const emit = defineEmits<{
+        (event: "update:date", value: string): void;
+        (event: "update:people", value: PeopleCounts): void;
+    }>();
+
+    const dateValue = computed({
+        get: () => props.date,
+        set: (value) => emit("update:date", value),
+    });
+
+    const peopleValue = computed({
+        get: () => props.people,
+        set: (value) => emit("update:people", value),
+    });
+</script>
+
 <template>
     <section class="hero-section">
         <div>
             <h1 class="text-white">Hitta ditt flow</h1>
             <p class="text-white-muted">Yoga-upplevelser för återhämtning, närvaro och balans. På dina villkor.</p>
         </div>
-        <SearchForm/>
+        <SearchForm v-model:date="dateValue" v-model:people="peopleValue" />
     </section>
 </template>
 

@@ -152,6 +152,16 @@
         width: 16rem;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         z-index: 10;
+        animation: anim 0.33s ease;
+        user-select: none;
+
+        @keyframes anim {
+            from {
+                filter: blur(5px);
+                opacity: 0;
+                transform: translateY(1rem);
+            }
+        }
     }
 
     .date-header {
