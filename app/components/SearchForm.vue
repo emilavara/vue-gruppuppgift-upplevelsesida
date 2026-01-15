@@ -86,9 +86,9 @@
         flex: 1;
     }
 
-    .picker-group + .picker-group {
-        border-left: 1px solid #e3e3e3;
-    }
+    // .picker-group + .picker-group {
+    //     border-left: 1px solid #e3e3e3;
+    // }
 
     .picker-toggle {
         position: relative;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import type { Experience } from '~/composables/useExperiences';
+    const route = useRoute();
     
     defineProps<{
         experience: Experience
@@ -17,7 +18,7 @@
             <p>{{ experience.location }} &bullet; från {{ experience.basePricePerDay }} kr</p>
         </div>
         <div class="button-container">
-            <NuxtLink :to="`/upplevelse/${experience.id}`" class="button secondary sm">Läs mer</NuxtLink>
+            <NuxtLink :to="{path: `/upplevelse/${experience.id}`, query: route.query}" class="button secondary sm">Läs mer</NuxtLink>
             <NuxtLink class="button primary sm">Boka nu</NuxtLink>
         </div>
     </div>
