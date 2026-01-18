@@ -2,56 +2,44 @@
 const route = useRoute()
 const id = route.params.id as string
 
-const { load, getById } = useExperiences()
+const { experiences, load, getById } = useExperiences()
 await load()
 
 const experience = computed(() => getById(id))
 </script>
 
 <template>
-    <!-- <br>
-    <div v-if="experience">
-        <h1>{{ experience.title }}</h1>
-        <p>{{ experience.description }}</p>
-    </div>
-
-    <p v-else>
-        Upplevelsen hittades inte.
-    </p> -->
     <section v-if="experience" class="experience-section grid gap-2 pt-8">
-        <div class="col-7">
+        <div class="col-6">
             <img :src="experience.image"/>
         </div>
+        <div class="col-1"></div>
         <div class="col-5">
-            <div class="text">
+            <div class="text mt-2">
                 <h2>{{ experience.title }}</h2>
 
                 <p>{{ experience.location }}</p>
                 <p class="mt-1">{{ experience.description }}</p>
-
-                <!-- <div class="flex gap-1">
-                    <div v-for="pkg in experience.packages" class="container">
-                        <p>{{ pkg.title }}</p>
-                        <p>{{ pkg.description }}</p>
-                        <p>{{ pkg.price }}</p>
-                    </div>
-                </div> -->
             </div>
             
-            <div class="choices">
-                <h5>Dina val (från query params)</h5>
+            <div class="choices mt-1">
+                <h5>Dina val</h5>
                 <ul>
-                    <li>Datum: 2025-10-05</li>
-                    <li>Personer: 2, vuxna ...</li>
+                    <li>Datum: {{ $route.query.date }}</li>
+                    <li>
+                        Personer: 
+                        <span v-if="$route.query.adults">{{ $route.query.adults }} vuxna, </span>
+                        <span v-if="$route.query.children">{{ $route.query.children }} barn, </span>
+                        <span v-if="$route.query.seniors">{{ $route.query.seniors }} seniorer</span>
+                    </li>
                 </ul>
             </div>
             
-            <h3 class="mt-2">{{ experience.basePricePerDay }}.00 SEK</h3>
-            <NuxtLink :to="'/boka/' + experience.id" class="button primary">Boka nu</NuxtLink>
-
+            <h2 class="mt-4">från {{ experience.basePricePerDay }}.00 SEK</h2>
+            <NuxtLink :to="'/boka/' + experience.id" class="button primary mt-1">Boka nu</NuxtLink>
         </div>
     </section>
-
+    <SectionsExperienceList :experiences="experiences"/>
 </template>
 
 <style lang="scss" scoped>
@@ -61,6 +49,7 @@ const experience = computed(() => getById(id))
             width: 100%;
             object-fit: cover;
             border-radius: 1rem;
+            aspect-ratio: 4 / 3;
         }
         
         .choices {
@@ -78,7 +67,6 @@ const experience = computed(() => getById(id))
         .col-5 {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: flex-start;
         }
     }

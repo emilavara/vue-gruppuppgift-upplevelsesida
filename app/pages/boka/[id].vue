@@ -1,66 +1,175 @@
 <script setup lang="ts">
-const route = useRoute()
-const id = route.params.id as string
+    import { ref, computed, onMounted } from 'vue';
 
-const { load, getById } = useExperiences()
-await load()
+    const route = useRoute()
+    const id = route.params.id as string
 
-const experience = computed(() => getById(id))
+    const { load, getById } = useExperiences()
+
+    const days = ref(1);
+    const people = ref({ adults: 2, children: 0, seniors: 0 });
+    const selectedPackageIds = ref<string[]>([])
+    
+    const totalPeople = computed(() => {
+        return Object.values(people.value)
+            .reduce((sum, value) => sum + value, 0);
+    });
+
+    const selectedPackages = computed(() => {
+        if (!experience.value) return []
+        return experience.value.packages.filter(p => selectedPackageIds.value.includes(p.id))
+    })
+
+    const packagesTotal = computed(() => {
+        return selectedPackages.value.reduce((sum, p) => sum + p.price, 0)
+    })
+
+    const baseTotal = computed(() => {
+        if (!experience.value) return 0
+        return experience.value.basePricePerDay * days.value * totalPeople.value
+    })
+
+    const totalPrice = computed(() => baseTotal.value + packagesTotal.value)
+
+    await load()
+
+    const experience = computed(() => getById(id))
+    const showPersonPicker = ref(false);
+
+    const togglePersonPicker = () => {
+        showPersonPicker.value = !showPersonPicker.value;
+    };
+
+    function togglePackage(id: string) {
+        const idx = selectedPackageIds.value.indexOf(id)
+        if (idx >= 0) {
+            selectedPackageIds.value.splice(idx, 1)
+        } else {
+            selectedPackageIds.value.push(id)
+        }
+    }
 </script>
 
 <template>
-    <section v-if="experience" class="experience-section grid gap-2 pt-8">
-        <div class="col-7">
-            <!-- <img :src="experience.image"/> -->
-        </div>
-        <div class="col-5">
-            <div class="text">
-                <h2>{{ experience.title }}</h2>
+    <section v-if="experience" class="experience-section grid gap-4 pt-8">
+        <div class="col-8 col-xs-12 flex flex-column">
+            <h2>Boka upplevelse</h2>
 
-                <p>{{ experience.location }}</p>
-                <p>{{ experience.description }}</p>
-                <p>{{ experience.basePricePerDay }}.00 SEK</p>
+            <div class="container">
+                <div class="image-container">
+                    <img :src="experience.image"/>
+                </div>
+                <div class="text-container">
+                    <h5>{{ experience.title }}</h5>
+                    <p>{{ experience.location }}</p>
+                    <p>{{ experience.shortDescription }}</p>
+                </div>
+            </div>
 
-                <div class="flex gap-1">
-                    <div v-for="pkg in experience.packages" class="container">
-                        <p>{{ pkg.title }}</p>
-                        <p>{{ pkg.description }}</p>
-                        <p>{{ pkg.price }}</p>
+            <div class="container">
+                <div class="person-row" style="width: 100%">
+                <h5>Antal dagar:</h5>
+                <div class="person-controls">
+                    <button class="button secondary sm" type="button" @click="days--">-</button>
+                    <span class="person-count">{{ days }}</span>
+                    <button class="button secondary sm" type="button" @click="days++">+</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="container justify-between" style="position: relative;">
+                <h5>Antal personer: {{ totalPeople }}</h5>
+                <button class="button secondary" @click.stop="togglePersonPicker"> Ändra</button>
+                <PersonPicker v-model="people" :show="showPersonPicker" @close="showPersonPicker = false" />
+            </div>
+
+            <div class="container package-container">
+                <div v-for="pkg in experience.packages" class="package">
+                    <input type="checkbox" :checked="selectedPackageIds.includes(pkg.id)" @change="togglePackage(pkg.id)" />
+                    <div class="text-container">
+                        <p class="title">{{ pkg.title }}</p>
+                        <p class="description">{{ pkg.description }}</p>
+                        <p class="price">{{pkg.price}}.00 SEK</p>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-4">
+            <h5>Sammanfattning</h5>
+            <p>{{ experience.title }} ({{ days }} dagar)</p>
+            <p>Antal personer: {{ totalPeople }}</p>
+            <p>Tillval: Massage</p>
             
-            <div class="choices">
-                <h5>Dina val (från query params)</h5>
-                <ul>
-                    <li>Datum: 2025-10-05</li>
-                    <li>Personer: 2, vuxna ...</li>
-                </ul>
-            </div>
-            
-            <NuxtLink class="button primary">Boka nu</NuxtLink>
-
+            <h3>Totalt: {{ totalPrice }}.00 SEK</h3>
+            <button class="button primary">Lägg i kundkorg</button>
         </div>
     </section>
-
 </template>
 
-<style lang="scss">
-    .experience-section {
-        img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            border-radius: 1rem;
+<style lang="scss" scoped>
+    .container {
+        display: flex;
+        background-color: transparent;
+        // height: 4rem;
+        border: 1px solid #e3e3e3;
+        border-radius: 1rem;
+        gap: 1rem;
+        align-items: center;
+        margin-top: 1rem;
+
+        &.package-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: stretch;
         }
-        
-        .choices {
+
+        .image-container {
+            aspect-ratio: 1 / 1;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 2px solid #e3e3e3;
+            height: 4rem;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .package {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
             background-color: var(--container-color);
             padding: 1rem;
+            border-radius: 1rem;
 
-            ul {
-                padding: 0;
-                list-style: none;
+            input {
+                appearance: none;
+                height: 1.5rem;
+                width: 1.5rem;
+                aspect-ratio: 1 / 1;
+                background-color: white;
+                border-radius: 100%;
+                border: 1px solid #e3e3e3;
+
+                &:checked {
+                    background-color: black;
+                    outline: 5px solid white;
+                    outline-offset: -6px;
+                }
+            }
+
+            .title, .price {
+                color: black;
+                font-weight: 600;
+            }
+
+            .description {
+                font-size: 0.875rem;
+                margin-bottom: 0.25rem;
+                min-height: 2.625rem;
             }
         }
     }

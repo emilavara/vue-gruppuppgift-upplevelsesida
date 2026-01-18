@@ -2,6 +2,8 @@
 import { PhFlowerLotus, PhMagnifyingGlass, PhShoppingCart } from '@phosphor-icons/vue';
 import { onMounted } from 'vue';
 
+const route = useRoute()
+
 onMounted(() => {
     let prevScrollpos = 0;
     let header = document.getElementById("header");
@@ -9,11 +11,11 @@ onMounted(() => {
     function handleHeaderScroll() {
         const currentScrollPos = window.scrollY;
 
-        if (currentScrollPos === 0) {
+        if (currentScrollPos === 0 && route.path === '/') {
             header.classList.add('at-top')
         }
 
-        if (currentScrollPos > 0) {
+        if (currentScrollPos > 0 && route.path === '/') {
             header.classList.remove('at-top')
         }
 
@@ -31,7 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <header id="header" class="at-top">
+    <header id="header" :class="[$route.path != '/' ? '' : 'at-top']">
         <div class="logo-container">
             <PhFlowerLotus size="2rem"/>
             <h4>Calma</h4>

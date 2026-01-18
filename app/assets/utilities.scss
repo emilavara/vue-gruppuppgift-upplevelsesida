@@ -180,12 +180,17 @@
 
 .flex {
     display: flex;
+}
 
-    &.justify-between {
-        justify-content: space-between;
+
+.flex-column {
+        flex-direction: column;
     }
 
-    &.align-center {
-        align-items: center;
-    }
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
 }
