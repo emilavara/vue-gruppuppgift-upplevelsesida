@@ -6,6 +6,7 @@
     const id = route.params.id as string
 
     const { load, getById } = useExperiences()
+    const cart = useCartStore()
     await load()
 
     const today = new Date();
@@ -52,6 +53,29 @@
     const toggleDatePicker = () => {
         showDatePicker.value = !showDatePicker.value;
     };
+
+    function addToCart() {
+        if (!experience.value) return
+
+        cart.addItem({
+            experienceId: experience.value.id,
+            title: experience.value.title,
+            image: experience.value.image,
+            date: date.value,
+            days: days.value,
+            people: { ...people.value },
+            packages: selectedPackages.value.map((pkg) => ({
+                id: pkg.id,
+                title: pkg.title,
+                price: pkg.price,
+            })),
+            basePricePerDay: experience.value.basePricePerDay,
+            totalPrice: totalPrice.value,
+        })
+
+        console.log('added to cart')
+        console.log(cart.items)
+    }
 
     function togglePackage(id: string) {
         const idx = selectedPackageIds.value.indexOf(id)
@@ -146,7 +170,7 @@
             <hr v-if="selectedPackages.length != 0">
 
             <h3>Totalt: {{ totalPrice }}.00 SEK</h3>
-            <button class="button primary mt-1">Lägg i kundkorg</button>
+            <button class="button primary mt-1" @click="addToCart">Lägg i kundkorg</button>
         </div>
     </section>
 </template>
