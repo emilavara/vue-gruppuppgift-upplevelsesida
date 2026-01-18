@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { defineStore, skipHydrate } from 'pinia'
+import { computed, ref, watch } from 'vue'
 
 export type CartPersonCounts = {
   adults: number
@@ -32,6 +32,18 @@ function createCartId() {
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
+  const storageKey = 'cart-items'
+
+  if (process.client) {
+    const raw = localStorage.getItem(storageKey)
+    if (raw) {
+      try {
+        items.value = JSON.parse(raw) as CartItem[]
+      } catch {
+        localStorage.removeItem(storageKey)
+      }
+    }
+  }
 
   const totalItems = computed(() => items.value.length)
   const totalPrice = computed(() =>
@@ -53,8 +65,18 @@ export const useCartStore = defineStore('cart', () => {
     items.value = []
   }
 
+  if (process.client) {
+    watch(
+      items,
+      (value) => {
+        localStorage.setItem(storageKey, JSON.stringify(value))
+      },
+      { deep: true }
+    )
+  }
+
   return {
-    items,
+    items: skipHydrate(items),
     totalItems,
     totalPrice,
     addItem,

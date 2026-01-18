@@ -3,23 +3,51 @@
         {
             "id": "why-yoga-retreat",
             "title": "Varför välja ett yogaretreat?",
-            "image": "/images/articles/yoga-retreat.jpg",
+            "image": "/images/articles/yoga-retreat.webp",
             "excerpt": "Ett yogaretreat ger dig tid att stanna upp, återhämta dig och hitta tillbaka till balansen.",
-            "content": "I en vardag fylld av krav och tempo kan ett yogaretreat vara precis det kroppen och sinnet behöver. Genom att kombinera yoga, vila och natur skapas utrymme för återhämtning på djupet."
+            "content": "I en vardag fylld av krav, skärmtid och högt tempo kan ett yogaretreat vara precis det kroppen och sinnet behöver. Ett retreat erbjuder en paus från vardagen där fokus ligger på återhämtning, närvaro och välmående.\n\nGenom att kombinera yoga, meditation, vila och ofta naturupplevelser skapas förutsättningar för djup återhämtning. Du får möjlighet att släppa stress, lyssna inåt och återknyta kontakten med kroppen. Många upplever ökad energi, bättre sömn och en större mental klarhet efter ett retreat.\n\nEtt yogaretreat passar både dig som är ny till yoga och dig som har praktiserat länge. Det handlar inte om prestation, utan om att skapa utrymme för dig själv."
         },
         {
             "id": "yoga-for-beginners",
             "title": "Yoga för nybörjare – vad ska man tänka på?",
-            "image": "/images/articles/yoga-beginners.jpg",
+            "image": "/images/articles/yoga-beginners.webp",
             "excerpt": "Du behöver inte vara vig eller erfaren för att börja med yoga.",
-            "content": "Yoga handlar inte om prestation utan om närvaro. Som nybörjare är det viktigt att lyssna på kroppen, ta pauser och hitta en form av yoga som känns rätt för dig."
+            "content": "Yoga handlar inte om prestation, smidighet eller att klara avancerade positioner. För nybörjare är det viktigaste att närma sig yogan med nyfikenhet och tålamod.\n\nDet finns många olika former av yoga, från lugna och stillsamma till mer fysiskt utmanande. Som nybörjare kan det vara bra att börja med en mjukare form och successivt utforska vad som passar just dig.\n\nLyssna alltid på kroppen, ta pauser när det behövs och jämför dig inte med andra. Yoga är en personlig praktik där varje pass ser olika ut – och det är helt okej."
         },
         {
             "id": "mindfulness-and-yoga",
             "title": "Mindfulness och yoga – en oslagbar kombination",
-            "image": "/images/articles/mindfulness-yoga.jpg",
+            "image": "/images/articles/mindfulness-yoga.webp",
             "excerpt": "När yoga och mindfulness möts skapas förutsättningar för verklig återhämtning.",
-            "content": "Mindfulness hjälper dig att vara närvarande i stunden, medan yoga stärker kroppen. Tillsammans bidrar de till minskad stress och ökat välmående."
+            "content": "Mindfulness och yoga kompletterar varandra på ett naturligt sätt. Medan yogan stärker kroppen och ökar rörligheten, hjälper mindfulness oss att stanna i nuet och bli medvetna om våra tankar och känslor.\n\nGenom att kombinera dessa två praktiker kan stressnivåer sänkas och välmåendet förbättras. Många upplever ökad koncentration, minskad oro och en djupare känsla av lugn.\n\nMindfulness i yoga handlar ofta om att följa andetaget, uppmärksamma kroppens signaler och acceptera det som är – utan att döma. Det gör yogan till mer än bara fysisk träning."
+        },
+        {
+            "id": "yoga-in-nature",
+            "title": "Yoga i naturen – därför gör det skillnad",
+            "image": "/images/experiences/forest-retreat.webp",
+            "excerpt": "Att praktisera yoga utomhus kan förstärka upplevelsen av lugn och närvaro.",
+            "content": "Naturen har en dokumenterat positiv effekt på både kropp och sinne. När yoga kombineras med skog, hav eller fjäll förstärks ofta känslan av lugn och återhämtning.\n\nAtt vistas utomhus kan sänka stressnivåer, förbättra humöret och göra det lättare att koppla bort vardagens distraktioner. Många upplever att andningen fördjupas och att närvaron ökar när yogan sker i en naturlig miljö.\n\nYoga i naturen behöver inte vara avancerad. Det kan handla om enkla rörelser, meditation eller andningsövningar – där omgivningen får bli en del av upplevelsen."
+        },
+        {
+            "id": "choose-right-retreat",
+            "title": "Så väljer du rätt yogaretreat för dig",
+            "image": "/images/articles/yoga-beginners.webp",
+            "excerpt": "Alla yogaretreats är olika – det gäller att hitta ett som passar dina behov.",
+            "content": "När du ska välja yogaretreat är det viktigt att utgå från dina egna behov och förväntningar. Vill du ha ett lugnt retreat med fokus på vila och återhämtning, eller söker du en mer aktiv upplevelse?\n\nFundera över plats, längd, nivå och innehåll. Vissa retreats fokuserar på meditation och stillhet, medan andra kombinerar yoga med vandring, spa eller workshops.\n\nDet finns inget rätt eller fel – det bästa retreatet är det som känns rätt för dig just nu. Läs beskrivningar noggrant och våga välja det som lockar mest."
+        },
+        {
+            "id": "benefits-of-yin-yoga",
+            "title": "Fördelarna med yin yoga",
+            "image": "/images/experiences/yin-yoga.webp",
+            "excerpt": "Yin yoga är en lugn och återhämtande yogaform med djupgående effekt.",
+            "content": "Yin yoga är en stillsam yogaform där positionerna hålls under längre tid. Fokus ligger på bindväv, leder och djup avslappning snarare än muskelstyrka.\n\nDen långsamma takten gör yin yoga särskilt effektiv för återhämtning och stressreducering. Många upplever ökad rörlighet, minskad spänning och ett lugnare nervsystem.\n\nYin yoga passar alla, oavsett tidigare erfarenhet. Det är en form av yoga som uppmuntrar till att släppa taget, vara närvarande och acceptera kroppens begränsningar."
+        },
+        {
+            "id": "yoga-as-self-care",
+            "title": "Yoga som egenvård i vardagen",
+            "image": "/images/experiences/beach-yoga.webp",
+            "excerpt": "Yoga kan vara ett kraftfullt verktyg för att ta hand om sig själv.",
+            "content": "Egenvård handlar om att prioritera sitt välmående – både fysiskt och mentalt. Yoga kan vara en enkel och effektiv del av detta, även i en stressig vardag.\n\nDet behöver inte handla om långa pass eller avancerade övningar. Några minuter med fokus på andning, rörlighet eller stillhet kan göra stor skillnad.\n\nGenom att göra yoga till en regelbunden vana kan du skapa bättre förutsättningar för balans, återhämtning och långsiktigt välmående."
         }
     ]
 }

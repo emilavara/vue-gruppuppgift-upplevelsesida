@@ -62,10 +62,13 @@
             </div>
             <PersonPicker v-model="peopleValue" :show="showPersonPicker" @close="showPersonPicker = false" />
         </div>
+        <div class="button-container">
+            <a href="#upplevelser" class="button primary">Sök</a>
+        </div>
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .search-form {
         height: 4rem;
         background-color: var(--bg-color);
@@ -77,7 +80,7 @@
         border: 1px solid #e3e3e3;
 
         @media (max-width: 768px) {
-            width: 100%;
+            width: 95%;
         }
     }
 
@@ -89,6 +92,17 @@
     // .picker-group + .picker-group {
     //     border-left: 1px solid #e3e3e3;
     // }
+
+    .button-container {
+        padding: 0.5rem;
+        
+        a {
+            height: calc(100% - 1rem);
+            width: 4rem;
+            display: grid;
+            place-items: center;
+        }
+    }
 
     .picker-toggle {
         position: relative;

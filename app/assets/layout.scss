@@ -6,7 +6,6 @@ section {
         padding-left: 1rem;
         padding-right: 1rem;
         max-width: unset;
-        width: 100%;
     }
 }
 
@@ -14,3 +13,11 @@ section {
     background-color: var(--container-color);
     padding: 1rem;
 }
+
+hr {
+        border: none;
+        border-top: 1px solid #e3e3e3;
+        height: 0;
+        background-color: transparent;
+        margin: 1rem 0;
+    }

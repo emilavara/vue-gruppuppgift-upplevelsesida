@@ -10,11 +10,11 @@ const experience = computed(() => getById(id))
 
 <template>
     <section v-if="experience" class="experience-section grid gap-2 pt-8">
-        <div class="col-6">
+        <div class="col-6 col-xs-12">
             <img :src="experience.image"/>
         </div>
-        <div class="col-1"></div>
-        <div class="col-5">
+        <div class="col-1 col-xs-12"></div>
+        <div class="col-5 col-xs-12">
             <div class="text mt-2">
                 <h2>{{ experience.title }}</h2>
 
@@ -22,7 +22,7 @@ const experience = computed(() => getById(id))
                 <p class="mt-1">{{ experience.description }}</p>
             </div>
             
-            <div class="choices mt-1">
+            <div v-if="$route.query.date" class="choices mt-1">
                 <h5>Dina val</h5>
                 <ul>
                     <li>Datum: {{ $route.query.date }}</li>
@@ -55,7 +55,7 @@ const experience = computed(() => getById(id))
         .choices {
             background-color: var(--container-color);
             padding: 1rem;
-            width: 100%;
+            width: calc(100% - 2rem);
             border-radius: 1rem;
 
             ul {

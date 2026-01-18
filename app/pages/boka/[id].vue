@@ -106,7 +106,7 @@
 </script>
 
 <template>
-    <section v-if="experience" class="experience-section grid gap-4 pt-8">
+    <section v-if="experience" class="booking-section grid gap-4 pt-8 pt-xs-6 pb-xs-8">
         <div class="col-8 col-xs-12 flex flex-column">
             <h2>Boka upplevelse</h2>
 
@@ -176,6 +176,13 @@
 </template>
 
 <style lang="scss" scoped>
+    .booking-section {
+        @media (max-width: 768px) {
+            column-gap: 0;
+        }
+    }
+
+
     .container {
         display: flex;
         background-color: transparent;
@@ -190,6 +197,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             justify-content: stretch;
+
+            @media (max-width: 768px) {
+                grid-template-columns: auto;
+            }
         }
 
         .image-container {
@@ -198,6 +209,10 @@
             overflow: hidden;
             border: 2px solid #e3e3e3;
             height: 4rem;
+
+            @media (max-width: 768px) {
+                display: none;
+            }
 
             img {
                 height: 100%;
@@ -241,13 +256,5 @@
                 min-height: 2.625rem;
             }
         }
-    }
-
-    hr {
-        border: none;
-        border-top: 1px solid #e3e3e3;
-        height: 0;
-        background-color: transparent;
-        margin: 1rem 0;
     }
 </style>

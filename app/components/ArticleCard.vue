@@ -1,31 +1,27 @@
 <script setup lang="ts">
-    import type { Experience } from '~/composables/useExperiences';
+    import type { Article } from '~/composables/useArticles';
+import type ArticleList from './sections/ArticleList.vue';
     const route = useRoute();
     
     defineProps<{
-        experience: Experience
+        article: Article
     }>()
 </script>
 
 <template>
-    <div class="col-3 col-xs-6 experience-card">
+    <NuxtLink :to="`/artikel/${article.id}`" class="col-3 col-xs-6 article-card">
         <div class="image-container">
-            <img :src="experience.image" height="200"/>
+            <img :src="article.image" height="200"/>
         </div>
         <div>
-            <h5>{{ experience.title }}</h5>
-            <!-- <p>{{ experience.description }}</p> -->
-            <p>{{ experience.location }} &bullet; från {{ experience.basePricePerDay }} kr</p>
+            <h5>{{ article.title }}</h5>
+            <p>{{ article.excerpt }}</p>
         </div>
-        <div class="button-container">
-            <NuxtLink :to="{path: `/upplevelse/${experience.id}`, query: route.query}" class="button secondary sm">Läs mer</NuxtLink>
-            <NuxtLink :to="{path: `/boka/${experience.id}`, query: route.query}" class="button primary sm">Boka nu</NuxtLink>
-        </div>
-    </div>
+    </NuxtLink>
 </template>
 
-<style lang="scss" scoped>
-    .experience-card {
+<style lang="scss">
+    .article-card {
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -60,10 +56,6 @@
             gap: 0.5rem;
             justify-content: flex-end;
             width: 100%;
-
-            @media (max-width: 768px) {
-                justify-content: flex-start;
-            }
         }
 
     }

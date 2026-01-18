@@ -3,12 +3,16 @@ import { PhFlowerLotus, PhMagnifyingGlass, PhShoppingCart } from '@phosphor-icon
 import { onMounted } from 'vue';
 
 const route = useRoute()
+const cart = useCartStore()
+
 
 onMounted(() => {
     let prevScrollpos = 0;
     let header = document.getElementById("header");
 
     function handleHeaderScroll() {
+        if (!header) return
+
         const currentScrollPos = window.scrollY;
 
         if (currentScrollPos === 0 && route.path === '/') {
@@ -34,13 +38,20 @@ onMounted(() => {
 
 <template>
     <header id="header" :class="[$route.path != '/' ? '' : 'at-top']">
-        <div class="logo-container">
+        <NuxtLink :to="'/'">
+            <div class="logo-container">
             <PhFlowerLotus size="2rem"/>
             <h4>Calma</h4>
         </div>
+        </NuxtLink>
         <div class="flex align-center gap-1">
             <PhMagnifyingGlass size="1.5rem"/>
-            <PhShoppingCart size="1.5rem"/>
+            <NuxtLink :to="'/kundkorg'" class="cart-btn">
+                <PhShoppingCart size="1.5rem"/>
+                <div class="cart-count">
+                    {{ cart.items.length }}
+                </div>
+            </NuxtLink>
             <button class="button secondary">Mina sidor</button>
         </div>
     </header>
@@ -83,6 +94,24 @@ onMounted(() => {
             color: white;
             h4 {
                 color: white;
+            }
+        }
+
+        .cart-btn {
+            position: relative;
+            
+            .cart-count {
+                position: absolute;
+                top: -0.5rem;
+                right: -0.5rem;
+                background: black;
+                color: white;
+                height: 1rem;
+                width: 1rem;
+                font-size: 0.75rem;
+                display: grid;
+                place-items: center;
+                border-radius: 100%;
             }
         }
     }

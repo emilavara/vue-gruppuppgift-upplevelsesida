@@ -10,6 +10,7 @@
 	const people = ref({ adults: 2, children: 0, seniors: 0 });
 
 	const { experiences, load: loadExperiences } = useExperiences();
+	const { articles, load: loadArticles } = useArticles();
 
 	const route = useRoute()
 	const router = useRouter()
@@ -37,6 +38,7 @@
     }, { deep: true })
 
 	await loadExperiences();
+	await loadArticles();
 
 	onMounted(() => {
 		if (typeof route.query.date === "string") {
@@ -59,7 +61,10 @@
 
 <template>
 	<SectionsHero v-model:date="date" v-model:people="people" />
-	<SectionsExperienceList :experiences="experiences"/>
+	<div id="upplevelser">
+		<SectionsExperienceList :experiences="experiences"/>
+	</div>
+	<SectionsArticleList :articles="articles"/>
 </template>
 
 <style lang="scss">

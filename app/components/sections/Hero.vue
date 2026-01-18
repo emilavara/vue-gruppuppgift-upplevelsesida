@@ -43,7 +43,6 @@
         height: 40vh;
         min-height: 23.5rem;
         max-width: unset;
-        width: 100%;
         display: grid;
         place-items: center;
         background-color: var(--container-color);
