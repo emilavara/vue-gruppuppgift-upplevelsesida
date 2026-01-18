@@ -36,7 +36,7 @@ const experience = computed(() => getById(id))
             </div>
             
             <h2 class="mt-4">från {{ experience.basePricePerDay }}.00 SEK</h2>
-            <NuxtLink :to="'/boka/' + experience.id" class="button primary mt-1">Boka nu</NuxtLink>
+            <NuxtLink :to="{path: `/boka/${experience.id}`, query: route.query}" class="button primary mt-1">Boka nu</NuxtLink>
         </div>
     </section>
     <SectionsExperienceList :experiences="experiences"/>

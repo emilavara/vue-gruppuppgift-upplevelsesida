@@ -1,3 +1,4 @@
+<!-- /boka/[id] -->
 <script setup lang="ts">
     import { ref, computed, onMounted } from 'vue';
 
@@ -5,6 +6,17 @@
     const id = route.params.id as string
 
     const { load, getById } = useExperiences()
+    await load()
+
+    const today = new Date();
+	const yyyy = today.getFullYear();
+	const mm = String(today.getMonth() + 1).padStart(2, "0");
+	const dd = String(today.getDate()).padStart(2, "0");
+
+	const date = ref<string>(`${yyyy}-${mm}-${dd}`);
+
+    const showPersonPicker = ref(false);
+    const showDatePicker = ref(false);
 
     const days = ref(1);
     const people = ref({ adults: 2, children: 0, seniors: 0 });
@@ -29,15 +41,16 @@
         return experience.value.basePricePerDay * days.value * totalPeople.value
     })
 
-    const totalPrice = computed(() => baseTotal.value + packagesTotal.value)
-
-    await load()
+    const totalPrice = computed(() => baseTotal.value + (packagesTotal.value * totalPeople.value))
 
     const experience = computed(() => getById(id))
-    const showPersonPicker = ref(false);
 
     const togglePersonPicker = () => {
         showPersonPicker.value = !showPersonPicker.value;
+    };
+
+    const toggleDatePicker = () => {
+        showDatePicker.value = !showDatePicker.value;
     };
 
     function togglePackage(id: string) {
@@ -48,6 +61,24 @@
             selectedPackageIds.value.push(id)
         }
     }
+
+    onMounted(() => {
+        if (typeof route.query.date === "string") {
+			date.value = route.query.date
+		}
+
+		if (typeof route.query.adults === "string") {
+			people.value.adults = Number(route.query.adults) || 0
+		}
+
+		if (typeof route.query.children === "string") {
+			people.value.children = Number(route.query.children) || 0
+		}
+
+		if (typeof route.query.seniors === "string") {
+			people.value.seniors = Number(route.query.seniors) || 0
+		}
+	})
 </script>
 
 <template>
@@ -64,6 +95,13 @@
                     <p>{{ experience.location }}</p>
                     <p>{{ experience.shortDescription }}</p>
                 </div>
+                <h4 style="margin-left: auto;">{{ experience.basePricePerDay }}.00 SEK</h4>
+            </div>
+
+            <div class="container justify-between" style="position: relative;">
+                <h5>Datum: {{ date }}</h5>
+                <button class="button secondary" @click.stop="toggleDatePicker"> Ändra</button>
+                <DatePicker v-model="date" :show="showDatePicker" @close="showDatePicker = false" />
             </div>
 
             <div class="container">
@@ -94,14 +132,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-4 col-xs-12">
             <h5>Sammanfattning</h5>
+            <hr>
             <p>{{ experience.title }} ({{ days }} dagar)</p>
+            <hr>
+            <p>Datum: {{ date }}</p>
+            <hr>
             <p>Antal personer: {{ totalPeople }}</p>
-            <p>Tillval: Massage</p>
-            
+            <hr>
+
+            <p v-if="selectedPackages.length != 0">Tillval: <span v-for="pkg in selectedPackages">{{ pkg.title + ', ' }}</span></p>
+            <hr v-if="selectedPackages.length != 0">
+
             <h3>Totalt: {{ totalPrice }}.00 SEK</h3>
-            <button class="button primary">Lägg i kundkorg</button>
+            <button class="button primary mt-1">Lägg i kundkorg</button>
         </div>
     </section>
 </template>
@@ -172,5 +217,13 @@
                 min-height: 2.625rem;
             }
         }
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #e3e3e3;
+        height: 0;
+        background-color: transparent;
+        margin: 1rem 0;
     }
 </style>
